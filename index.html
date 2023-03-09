@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Site</title>
+	</head>
+	<body>
+		<div id="register" class="register">
+			<form action="" id="character-form">
+				<label for="">
+					Введите имя персонажа:
+					<input
+						id="input-name-character"
+						type="text"
+						value="Guest"
+					/>
+				</label>
+				<label for="">
+					Выберите пол персонажа:
+					<input
+						type="radio"
+						name="input-gender-character"
+						class="radio-character"
+						value="male"
+						checked
+					/>
+					- мужчина
+					<input
+						type="radio"
+						name="input-gender-character"
+						class="radio-character"
+						value="female"
+					/>
+					- женщина
+				</label>
+				<label for="">
+					Выберите класс персонажа:
+					<input
+						type="radio"
+						name="input-class-character"
+						class="radio-character"
+						value="warrior"
+						checked
+					/>
+					- воин
+					<input
+						type="radio"
+						name="input-class-character"
+						class="radio-character"
+						value="magician"
+					/>
+					- маг
+					<input
+						type="radio"
+						name="input-class-character"
+						class="radio-character"
+						value="archer"
+					/>
+					- лучник
+				</label>
+				<label for="">
+					Подтвердите создание персонажа:
+					<input
+						type="button"
+						id="submit-register-character"
+						value="Подтвердить"
+					/>
+				</label>
+				<h1>Дисклеймер</h1>
+				<h2>
+					Попрошу проходить игру в полноэкранном разрешении нажав на
+					кнопку 'F11'!
+				</h2>
+				<h2>
+					Прошу, не воспринимайте сюжетную линию за правду. Вас, ни
+					кто, ни как, не хочет оскорбить!
+				</h2>
+			</form>
+		</div>
+		<div id="figth-with-enemy" class="hide-object">
+			<div id="character">
+				<div id="name-and-health-character">
+					<h1 class="name-for-all-character"></h1>
+					<h2 class="health-for-all-character"></h2>
+				</div>
+				<img src="" alt="img-character" class="img-for-all-character" />
+				<form action="">
+					<label id="buttons-for-attack-and-treatment" for="">
+						<input
+							id="btn-attack-enemy"
+							type="button"
+							value="Атака"
+						/>
+						<input
+							class="btn-treatment-character"
+							type="button"
+							value="Лечение"
+						/>
+					</label>
+				</form>
+			</div>
+			<div id="enemy">
+				<div id="name-and-health-enemy">
+					<h1 id="name-enemy">Enemy</h1>
+					<h2 id="health-enemy"></h2>
+				</div>
+				<img id="img-enemy" src="img/enemy.png" alt="img-enemy" />
+			</div>
+		</div>
+		<div id="lost-to-the-enemy" class="hide-object">
+			<div id="character">
+				<div id="name-and-health-character">
+					<h1 class="name-for-all-character"></h1>
+					<h2 class="health-for-all-character"></h2>
+				</div>
+				<img src="" alt="img-character" class="img-for-all-character" />
+				<form action="">
+					<label id="buttons-for-attack-and-treatment" for="">
+						<input
+							id="btn-attack-weak-enemy"
+							type="button"
+							value="Атака"
+						/>
+						<input
+							class="btn-treatment-character"
+							type="button"
+							value="Лечение"
+						/>
+					</label>
+				</form>
+			</div>
+			<div id="weak-enemy">
+				<div id="name-and-health-weak-enemy">
+					<h1 id="name-weak-enemy">Weak Enemy</h1>
+					<h2 id="health-weak-enemy"></h2>
+				</div>
+				<img
+					id="img-weak-enemy"
+					src="img/weak_enemy.png"
+					alt="img-weak-enemy"
+				/>
+			</div>
+		</div>
+		<div id="health-booster-puzzle" class="hide-object">
+			<h2>Кто из них был императором всероссийским?</h2>
+			<div id="puzzle">
+				<img
+					id="alexandr-fhe-first"
+					src="img/Александр_I.png"
+					alt="Александр_I"
+				/>
+				<img
+					id="napoleon-fhe-first"
+					src="img/Наполеон_I.png"
+					alt="Наполеон_I"
+				/>
+			</div>
+			<div id="answer-puzzle"></div>
+		</div>
+		<div id="defeated-the-any-enemy" class="hide-object">
+			<label for="">
+				<input
+					type="button"
+					name="start-mysterious-way"
+					id="btn-start-mysterious-way"
+					value="Нажми на меня..."
+				/>
+			</label>
+			<div id="mysterious-event-one" class="hide-object">
+				<h2 id="mysterious-question-one">Кто ты такой?</h2>
+				<label for="">
+					<input
+						class="btn-answer-mysterious-question-one"
+						type="button"
+						value="Человек"
+					/>
+					<input
+						class="btn-answer-mysterious-question-one"
+						type="button"
+						value="Монстр"
+					/>
+					<input
+						class="btn-answer-mysterious-question-one"
+						type="button"
+						value="Персонаж из OverWatch"
+					/>
+					<input
+						class="btn-answer-mysterious-question-one"
+						type="button"
+						value="Я не знаю, кто я такой..."
+					/>
+				</label>
+			</div>
+			<div id="mysterious-event-two" class="hide-object">
+				<h2 id="mysterious-question-two">Зачем ты здесь?</h2>
+				<label for="">
+					<input
+						class="btn-answer-mysterious-question-two"
+						type="button"
+						value="Убить тебя"
+					/>
+					<input
+						class="btn-answer-mysterious-question-two"
+						type="button"
+						value="Спасти мир"
+					/>
+					<input
+						class="btn-answer-mysterious-question-two"
+						type="button"
+						value="Стать богом"
+					/>
+					<input
+						class="btn-answer-mysterious-question-two"
+						type="button"
+						value="Чтобы жить спокойной жизнью"
+					/>
+				</label>
+			</div>
+			<div id="mysterious-event-three" class="hide-object">
+				<h2 id="mysterious-question-three">Пей же его!</h2>
+				<label for="">
+					<input
+						class="btn-answer-mysterious-question-three"
+						type="button"
+						value="Выпить..."
+					/>
+					<input
+						class="btn-answer-mysterious-question-three"
+						type="button"
+						value="Что-то тут не так... Я не буду пить его!"
+					/>
+				</label>
+			</div>
+		</div>
+		<div id="figth-with-ice-boss" class="hide-object">
+			<div id="character">
+				<div id="name-and-health-character">
+					<h1 class="name-for-all-character"></h1>
+					<h2 class="health-for-all-character"></h2>
+				</div>
+				<img src="" alt="img-character" class="img-for-all-character" />
+				<form action="">
+					<label id="buttons-for-attack-and-treatment" for="">
+						<input
+							id="btn-attack-ice-boss"
+							type="button"
+							value="Атака"
+						/>
+						<input
+							class="btn-treatment-character"
+							type="button"
+							value="Лечение"
+						/>
+					</label>
+				</form>
+			</div>
+			<div id="ice-boss">
+				<div id="name-and-health-ice-boss">
+					<h1 id="name-ice-boss">Ice Boss</h1>
+					<h2 id="health-ice-boss"></h2>
+				</div>
+				<img
+					id="img-ice-boss"
+					src="img/ice_boss.png"
+					alt="img-ice-boss"
+				/>
+			</div>
+		</div>
+		<div id="prize-game" class="hide-object">
+			<div id="div-text-win">
+				<h1 id="text-win">
+					Приветсвую, благадарю за прохождение моей игры, написанную
+					на JS + HTML&CSS. Вы большой молодец! Надеюсь, что игра вам
+					хоть немно, но приглянулось. Удачи и всего хорошего :D
+				</h1>
+			</div>
+		</div>
+		<div id="lost-to-the-ice-boss" class="hide-object">
+			<div id="div-text-lost">
+				<h1 id="text-lost">
+					Приветствую, к сожалению вы не смогли пройти игру до конца,
+					но у вас есть шанс пройти её сначала, для это необходимо
+					перезагрузить страницу. Благадарю вас за то, что вы уделили
+					внимание моей игре, но не отчаеваетесь, вы большой молодец!
+					Надеюсь, вам приглянулась моя игра, написанная на JS +
+					HTML&CSS. Удачи и всего хорошего :D
+				</h1>
+			</div>
+		</div>
+		<script src="index.js"></script>
+	</body>
+</html>
