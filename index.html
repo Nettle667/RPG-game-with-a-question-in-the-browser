@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="style.css" />
-		<title>Site</title>
+		<title>RPG/text game</title>
 	</head>
 	<body>
 		<div id="register" class="register">
@@ -79,8 +79,61 @@
 					кто, ни как, не хочет оскорбить!
 				</h2>
 			</form>
+			<label for="">
+				<input
+					id="btn-transition-to-the-tic-tac-toe"
+					type="button"
+					class="btn-transition-to-the-tic-tac-toe"
+					value="Переход в игру крестики нолики!"
+				/>
+			</label>
 		</div>
-		<div id="figth-with-enemy" class="hide-object">
+		<div id="zero-stage" class="hide-object">
+			<div id="div-tic-tac-toe">
+				<label id="label-btn-start-tic-tac-toe" for="">
+					<input
+						type="button"
+						name="btn-start-tic-tac-toe"
+						id="btn-start-tic-tac-toe"
+						value="Нажми на меня для старта игры в крестики нолики!"
+					/>
+				</label>
+				<table id="table-tic-tac-toe" class="hide-object">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<label for="">
+				<input
+					id="btn-restart-tic-tac-toe"
+					type="button"
+					class="hide-object"
+					value="Перезапустить крестики-нолики!"
+				/>
+			</label>
+			<label for="">
+				<input
+					id="btn-transition-to-the-register"
+					type="button"
+					class="btn-transition-to-the-register"
+					value="Переход на страницу регистрации в игру!"
+				/>
+			</label>
+		</div>
+		<div id="fight-with-enemy" class="hide-object">
 			<div id="character">
 				<div id="name-and-health-character">
 					<h1 class="name-for-all-character"></h1>

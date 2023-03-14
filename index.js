@@ -1,3 +1,113 @@
+// Function to change class
+const stageChange = (divOne, divTwo) => {
+	divOne.classList.remove(divOne.id);
+	divOne.classList.add('hide-object');
+	divTwo.classList.remove('hide-object');
+	divTwo.classList.add(divTwo.id);
+};
+
+// Function to change hide-object
+const changeHideObject = (divOne, divTwo) => {
+	divOne.classList.remove('hide-object');
+	divTwo.classList.add('hide-object');
+};
+
+// Variables for game "tic-tac-toe"
+const divZeroStage = document.getElementById('zero-stage');
+const btnTransitionToTheTicTacToe = document.getElementById(
+	'btn-transition-to-the-tic-tac-toe'
+);
+const btnTransitionToTheRegister = document.getElementById(
+	'btn-transition-to-the-register'
+);
+const btnRestartTicTacToe = document.getElementById('btn-restart-tic-tac-toe');
+const btnStartTicTacToe = document.getElementById('btn-start-tic-tac-toe');
+const tabelTicTacToe = document.getElementById('table-tic-tac-toe');
+const cells = document.querySelectorAll('#table-tic-tac-toe td');
+
+// Function to check lines to win
+const checkLinesToWin = argCells => {
+	comboList = [
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8],
+		[0, 4, 8],
+		[2, 4, 6]
+	];
+
+	for (let combo of comboList) {
+		if (
+			argCells[combo[0]].textContent == argCells[combo[1]].textContent &&
+			argCells[combo[0]].textContent == argCells[combo[2]].textContent &&
+			argCells[combo[0]].textContent != ''
+		) {
+			return true;
+		}
+	}
+	return false;
+};
+
+// Function to remove event listener from cells
+const cellsRemoveEventListener = func => {};
+
+// Function start game "tic-tac-toe"
+const startTicTacToe = argCells => {
+	let counterStep = 0;
+
+	for (let cell of argCells) {
+		cell.addEventListener('click', function step() {
+			cell.textContent = ['X', 'O'][counterStep % 2];
+			cell.removeEventListener('click', step);
+
+			if (checkLinesToWin(argCells)) {
+				setTimeout(() => alert(`Победа за ${cell.textContent}`), 50);
+			} else if (counterStep == 8) {
+				setTimeout(() => alert('Ничья'), 50);
+			}
+
+			counterStep++;
+		});
+	}
+};
+
+// Function restart game "tic-tac-toe"
+const restartTicTacToe = () => {
+	cells.forEach(el => (el.textContent = ''));
+	startTicTacToe(cells);
+};
+
+// Checking the button event to start the game "tic-tac-toe"
+btnStartTicTacToe.addEventListener('click', () => {
+	changeHideObject(tabelTicTacToe, btnStartTicTacToe);
+	btnRestartTicTacToe.classList.remove('hide-object');
+	startTicTacToe(cells);
+});
+
+// Checking the button event to restart the game "tic-tac-toe"
+btnRestartTicTacToe.addEventListener('click', restartTicTacToe);
+
+// Function to transition to the tic tac toe
+const transitionToTheTicTacToe = () => {
+	stageChange(divRegister, divZeroStage);
+};
+
+// Checking the button event to transition to the tic tac toe
+btnTransitionToTheTicTacToe.addEventListener('click', transitionToTheTicTacToe);
+
+// Function to transition to the register
+const transitionToTheRegister = () => {
+	stageChange(divZeroStage, divRegister);
+	cells.forEach(el => (el.textContent = ''));
+	changeHideObject(btnStartTicTacToe, tabelTicTacToe);
+	btnRestartTicTacToe.classList.add('hide-object');
+};
+
+// Checking the button event to transition to the register
+btnTransitionToTheRegister.addEventListener('click', transitionToTheRegister);
+
 // Variables for registring character
 const divRegister = document.getElementById('register');
 const submitCharacter = document.getElementById('submit-register-character');
@@ -46,10 +156,7 @@ const registerCharacter = () => {
 		}
 	}
 
-	divRegister.classList.remove('register');
-	divRegister.classList.add('hide-object');
-	divFightWithEnemy.classList.remove('hide-object');
-	divFightWithEnemy.classList.add('fight-with-enemy');
+	stageChange(divRegister, divFightWithEnemy);
 	alert(
 		'Добро пожаловать, вы зарегистрировались в игре. Игра представляет собой мини RPG игру/текстовая игра. Вам будет необходимо победить несколько врагов, а также ответить на вопросы. Желаю вам успеха!'
 	);
@@ -59,7 +166,7 @@ const registerCharacter = () => {
 submitCharacter.addEventListener('click', registerCharacter);
 
 // Variables for figth with enemy and for enemy
-const divFightWithEnemy = document.getElementById('figth-with-enemy');
+const divFightWithEnemy = document.getElementById('fight-with-enemy');
 const btnAttackEnemy = document.getElementById('btn-attack-enemy');
 const btnsTreatmentCharacter = document.getElementsByClassName(
 	'btn-treatment-character'
@@ -87,10 +194,7 @@ const attackEnemy = () => {
 		alert(
 			'К сожалению, вы не смогли убить врага, но ничего страшного, у вас есть шанс победить слабого врага. Вперед...'
 		);
-		divFightWithEnemy.classList.remove('fight-with-enemy');
-		divFightWithEnemy.classList.add('hide-object');
-		divLostToTheEnemy.classList.remove('hide-object');
-		divLostToTheEnemy.classList.add('lost-to-the-enemy');
+		stageChange(divFightWithEnemy, divLostToTheEnemy);
 		currentHealthCharacter = 100;
 	} else if (
 		(currentHealthEnemy <= 0) &
@@ -99,10 +203,7 @@ const attackEnemy = () => {
 		alert(
 			'Ура, вы победили врага. Теперь вы можете попытаться решить задачу и получить бонус :)'
 		);
-		divFightWithEnemy.classList.remove('fight-with-enemy');
-		divFightWithEnemy.classList.add('hide-object');
-		divHealthBoosterPuzzle.classList.remove('hide-object');
-		divHealthBoosterPuzzle.classList.add('health-booster-puzzle');
+		stageChange(divFightWithEnemy, divHealthBoosterPuzzle);
 		currentHealthCharacter = 100;
 	}
 };
@@ -147,10 +248,7 @@ const attackWeakEnemy = () => {
 		alert(
 			'Хорошо, вы убили слабого врага! Теперь вы можете перейти к следующему уровню.'
 		);
-		divLostToTheEnemy.classList.remove('lost-to-the-enemy');
-		divLostToTheEnemy.classList.add('hide-object');
-		divDefeatedTheAneEnemy.classList.remove('hide-object');
-		divDefeatedTheAneEnemy.classList.add('defeated-the-any-enemy');
+		stageChange(divLostToTheEnemy, divDefeatedTheAnyEnemy);
 		currentHealthCharacter = 100;
 	}
 };
@@ -169,10 +267,7 @@ const answerPuzzle = document.getElementById('answer-puzzle');
 
 // Function for correct choice in health booster puzzle
 const correctChoice = () => {
-	divHealthBoosterPuzzle.classList.remove('health-booster-puzzle');
-	divHealthBoosterPuzzle.classList.add('hide-object');
-	divDefeatedTheAneEnemy.classList.remove('hide-object');
-	divDefeatedTheAneEnemy.classList.add('defeated-the-any-enemy');
+	stageChange(divHealthBoosterPuzzle, divDefeatedTheAnyEnemy);
 	alert('Правильный ответ! Ура, вы получили бонус +100hp!');
 	currentHealthCharacter += 100;
 	healthCharacter[2].innerText = currentHealthCharacter;
@@ -180,10 +275,7 @@ const correctChoice = () => {
 
 // Function for incorrect choice in health booster puzzle
 const incorrectChoice = () => {
-	divHealthBoosterPuzzle.classList.remove('health-booster-puzzle');
-	divHealthBoosterPuzzle.classList.add('hide-object');
-	divDefeatedTheAneEnemy.classList.remove('hide-object');
-	divDefeatedTheAneEnemy.classList.add('defeated-the-any-enemy');
+	stageChange(divHealthBoosterPuzzle, divDefeatedTheAnyEnemy);
 	alert('Не правильный ответ! К сожалению, вы не получаете бонус :(');
 };
 
@@ -192,7 +284,7 @@ imgAlexandrTheFirst.addEventListener('click', correctChoice);
 imgNapoleonTheFirst.addEventListener('click', incorrectChoice);
 
 // Variables defeated the any enemy / mysterious way
-const divDefeatedTheAneEnemy = document.getElementById(
+const divDefeatedTheAnyEnemy = document.getElementById(
 	'defeated-the-any-enemy'
 );
 const btnStartMysteriousWay = document.getElementById(
@@ -217,8 +309,7 @@ const startMysteriousWay = () => {
 	alert(
 		'Добро пожаловать, странник! Ты в таверне "Времени", будь добр, ответь на несколько вопросов...'
 	);
-	mysteriousEventOne.classList.remove('hide-object');
-	mysteriousEventOne.classList.add('mysterious-event-one');
+	changeHideObject(mysteriousEventOne, mysteriousEventOne);
 };
 
 // Function for chcking mysterious question one
@@ -229,10 +320,7 @@ const answerMysteriousQuestionOne = i => {
 		alert(
 			`Ухты, ответ: "${btnsAnswerMysteriousQuestionOne[i].value}", верный! Ведь ты не из этой вселенной. Тебя ждёт сложная дорога! Так что, если ты ответишь на следующий вопрос верно, то я дам тебе бонус! Давай, вперёд...`
 		);
-		mysteriousEventOne.classList.remove('mysterious-event-one');
-		mysteriousEventOne.classList.add('hide-object');
-		mysteriousEventTwo.classList.remove('hide-object');
-		mysteriousEventTwo.classList.add('mysterious-event-two');
+		stageChange(mysteriousEventOne, mysteriousEventTwo);
 	} else {
 		alert(
 			`К сожалению, ты не: "${btnsAnswerMysteriousQuestionOne[i].value}"!`
@@ -246,18 +334,12 @@ const answerMysteriousQuestionTwo = i => {
 		alert(
 			'Ох-ха-ха-ха ^) А ты очень интересный! Смог же, увидеть во мне ЗЛО. Так давай же попробуй убить меня...'
 		);
-		divDefeatedTheAneEnemy.classList.remove('defeated-the-any-enemy');
-		divDefeatedTheAneEnemy.classList.add('hide-object');
-		divFightWithIceBoss.classList.remove('hide-object');
-		divFightWithIceBoss.classList.add('figth-with-ice-boss');
+		stageChange(divDefeatedTheAnyEnemy, divFightWithIceBoss);
 	} else {
 		alert(
 			`Отличная цель: "${btnsAnswerMysteriousQuestionTwo[i].value}". Я уверен, у тебя всё получиться ^) Ты интересно ответил на мой вопрос, так что держи зелье для увеличения урона. Оно понадобиться тебе в будущем, хех) Выпей же его!`
 		);
-		mysteriousEventTwo.classList.remove('mysterious-event-two');
-		mysteriousEventTwo.classList.add('hide-object');
-		mysteriousEventThree.classList.remove('hide-object');
-		mysteriousEventThree.classList.add('mysterious-event-three');
+		stageChange(mysteriousEventTwo, mysteriousEventThree);
 	}
 };
 
@@ -265,7 +347,7 @@ const answerMysteriousQuestionTwo = i => {
 const answerMysteriousQuestionThree = i => {
 	if (btnsAnswerMysteriousQuestionThree[i].value === 'Выпить...') {
 		alert(
-			`Ах-ха-ха-ха, ты такой глупец! Довольно сильное существо из другой вселенной, но всё равно не смогло увидеть во мне ЗЛО! Здесь ты и умрёшь...`
+			`Ах-ха-ха-ха, ты такой глупец! Довольно сильное существо из другой вселенной, но всё равно не смогло распознать во мне ЗЛО! Здесь ты и умрёшь... (-50hp)`
 		);
 		currentHealthCharacter -= 50;
 		healthCharacter[2].innerText = currentHealthCharacter;
@@ -274,10 +356,7 @@ const answerMysteriousQuestionThree = i => {
 			`Ахты, подлец! В последний момент успел сохранить здоровье. Ну ничего, всё равно ты здесь и умрёшь...`
 		);
 	}
-	divDefeatedTheAneEnemy.classList.remove('defeated-the-any-enemy');
-	divDefeatedTheAneEnemy.classList.add('hide-object');
-	divFightWithIceBoss.classList.remove('hide-object');
-	divFightWithIceBoss.classList.add('figth-with-ice-boss');
+	stageChange(divDefeatedTheAnyEnemy, divFightWithIceBoss);
 };
 
 // Checking button events for mysterious questions
@@ -334,10 +413,7 @@ const attackIceBoss = () => {
 		alert(
 			'Ха-ха-ха-ха-ха, ты не смог победить меня. Я думал ты достойный соперник, но оказалось наоборот. Слабое существо из другой вселенной, умри же!'
 		);
-		divFightWithIceBoss.classList.remove('figth-with-ice-boss');
-		divFightWithIceBoss.classList.add('hide-object');
-		divLostToTheIceBoss.classList.remove('hide-object');
-		divLostToTheIceBoss.classList.add('lost-to-the-ice-boss');
+		stageChange(divFightWithIceBoss, divLostToTheIceBoss);
 	} else if (
 		(currentHealthIceBoss <= 0) &
 		(currentHealthCharacter > currentHealthIceBoss)
@@ -345,10 +421,7 @@ const attackIceBoss = () => {
 		alert(
 			'Ах-ах, ты достойный соперник. Сильный и не слепой, как никто другой до тебя. Ладно, моё время подошло к концу, так что прошай...'
 		);
-		divFightWithIceBoss.classList.remove('figth-with-ice-boss');
-		divFightWithIceBoss.classList.add('hide-object');
-		divPrizeGame.classList.remove('hide-object');
-		divPrizeGame.classList.add('prize-game');
+		stageChange(divFightWithIceBoss, divPrizeGame);
 	}
 };
 
