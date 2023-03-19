@@ -314,6 +314,7 @@ imgNapoleonTheFirst.addEventListener('click', incorrectChoice);
 const divDefeatedTheAnyEnemy = document.getElementById(
 	'defeated-the-any-enemy'
 );
+const divStartMysteriousWay = document.getElementById('start-mysterious-way');
 const btnStartMysteriousWay = document.getElementById(
 	'btn-start-mysterious-way'
 );
@@ -332,11 +333,10 @@ const btnsAnswerMysteriousQuestionThree = document.getElementsByClassName(
 
 // Function start mysterious way
 const startMysteriousWay = () => {
-	btnStartMysteriousWay.classList.add('hide-object');
 	alert(
 		'Добро пожаловать, странник! Ты в таверне "Времени", будь добр, ответь на несколько вопросов...'
 	);
-	changeHideObject(mysteriousEventOne, mysteriousEventOne);
+	stageChange(divStartMysteriousWay, mysteriousEventOne);
 };
 
 // Function for chcking mysterious question one
