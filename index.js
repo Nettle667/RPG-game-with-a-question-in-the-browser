@@ -24,6 +24,14 @@ const btnRestartTicTacToe = document.getElementById('btn-restart-tic-tac-toe');
 const btnStartTicTacToe = document.getElementById('btn-start-tic-tac-toe');
 const tabelTicTacToe = document.getElementById('table-tic-tac-toe');
 const cells = document.querySelectorAll('#table-tic-tac-toe td');
+const whoseMoveTicTacToe = document.getElementById('whose-move-tic-tac-toe');
+const popupTicTacToe = document.getElementById('popup-tic-tac-toe');
+const answerWhoWonTicTacToe = document.getElementById(
+	'answer-who-won-tic-tac-toe'
+);
+const btnConfirmationWhoWon = document.getElementById(
+	'btn-confirmation-who-won'
+);
 
 // Function to check lines to win
 const checkLinesToWin = argCells => {
@@ -50,25 +58,36 @@ const checkLinesToWin = argCells => {
 	return false;
 };
 
-// Function to remove event listener from cells
-const cellsRemoveEventListener = func => {};
-
 // Function start game "tic-tac-toe"
 const startTicTacToe = argCells => {
+	let flag = true;
 	let counterStep = 0;
+	whoseMoveTicTacToe.innerText = 'Ходит: X';
 
 	for (let cell of argCells) {
 		cell.addEventListener('click', function step() {
-			cell.textContent = ['X', 'O'][counterStep % 2];
-			cell.removeEventListener('click', step);
+			if (flag) {
+				cell.textContent = ['X', 'O'][counterStep % 2];
+				cell.removeEventListener('click', step);
 
-			if (checkLinesToWin(argCells)) {
-				setTimeout(() => alert(`Победа за ${cell.textContent}`), 50);
-			} else if (counterStep == 8) {
-				setTimeout(() => alert('Ничья'), 50);
+				if (checkLinesToWin(argCells)) {
+					setTimeout(() => {
+						flag = false;
+						answerWhoWonTicTacToe.innerText = `Победа за ${cell.textContent}`;
+						popupTicTacToe.classList.add('open');
+					}, 50);
+				} else if (counterStep == 8) {
+					setTimeout(() => {
+						answerWhoWonTicTacToe.innerText = `Ничья`;
+						popupTicTacToe.classList.add('open');
+					}, 50);
+				}
+
+				counterStep++;
+				whoseMoveTicTacToe.innerText = `Ходит: ${
+					['X', 'O'][counterStep % 2]
+				}`;
 			}
-
-			counterStep++;
 		});
 	}
 };
@@ -88,6 +107,14 @@ btnStartTicTacToe.addEventListener('click', () => {
 
 // Checking the button event to restart the game "tic-tac-toe"
 btnRestartTicTacToe.addEventListener('click', restartTicTacToe);
+
+// Function confirmation who won
+const confirmationWhoWon = () => {
+	popupTicTacToe.classList.remove('open');
+};
+
+// Checking the button event to confirmation who won
+btnConfirmationWhoWon.addEventListener('click', confirmationWhoWon);
 
 // Function to transition to the tic tac toe
 const transitionToTheTicTacToe = () => {

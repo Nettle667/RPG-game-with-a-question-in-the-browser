@@ -115,7 +115,7 @@
 #btn-start-tic-tac-toe {
 	font-size: 32px;
 	background: blueviolet;
-	color: white;
+	color: black;
 	border: 1px solid white;
 	border-radius: 15px;
 	box-shadow: 5px 5px 5px white;
@@ -130,6 +130,13 @@
 	align-items: center;
 }
 
+#whose-move-tic-tac-toe {
+	font-size: 60px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+}
+
 #table-tic-tac-toe {
 	border-collapse: collapse;
 }
@@ -142,6 +149,67 @@
 	font-weight: bold;
 	font-style: italic;
 	text-align: center;
+}
+
+#table-tic-tac-toe td:hover {
+	background-color: rgba(241, 241, 241, 0.3);
+}
+
+.popup-tic-tac-toe {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	top: 0;
+	left: 0;
+
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.8s ease 0s;
+}
+
+.popup-tic-tac-toe.open {
+	opacity: 1;
+	visibility: visible;
+}
+
+.popup-tic-tac-toe.open .popup-content-tic-tac-toe {
+	transform: perspective(600px) translate(0px, 0%) rotateX(0deg);
+	opacity: 1;
+}
+
+.popup-body-tic-tac-toe {
+	min-height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 30px 10px;
+	transition: all 0.8s ease 0s;
+}
+
+.popup-content-tic-tac-toe {
+	text-align: center;
+	background-color: rgb(96, 96, 96);
+	color: black;
+	max-width: 800px;
+	padding: 30px;
+
+	border-radius: 30px;
+	border: 1px solid black;
+	box-shadow: 5px 5px 5px gray;
+	text-shadow: none;
+
+	position: relative;
+	transition: all 0.8s ease 0s;
+	opacity: 0;
+	transform: perspective(600px) translate(0px, -100%) rotateX(45deg);
+}
+
+#answer-who-won-tic-tac-toe {
+	font-size: 64px;
+	font-weight: bold;
+	font-style: italic;
+	color: black;
 }
 
 #div-text-lost,
@@ -182,14 +250,32 @@ input {
 #submit-register-character,
 #btn-attack-enemy,
 #btn-attack-weak-enemy,
-#btn-attack-ice-boss {
+#btn-attack-ice-boss,
+#btn-confirmation-who-won {
 	margin: 10px;
 	background: blueviolet;
-	color: white;
+	color: black;
 	border: 1px solid white;
 	border-radius: 15px;
 	box-shadow: 5px 5px 5px white;
 	text-shadow: none;
+}
+
+.btn-answer-mysterious-question-one:hover,
+.btn-answer-mysterious-question-two:hover,
+.btn-answer-mysterious-question-three:hover,
+.btn-treatment-character:hover,
+#btn-restart-tic-tac-toe:hover,
+#btn-transition-to-the-tic-tac-toe:hover,
+#btn-transition-to-the-register:hover,
+#btn-start-mysterious-way:hover,
+#submit-register-character:hover,
+#btn-attack-enemy:hover,
+#btn-attack-weak-enemy:hover,
+#btn-attack-ice-boss:hover,
+#btn-start-tic-tac-toe:hover,
+#btn-confirmation-who-won:hover {
+	color: white;
 }
 
 #character,
